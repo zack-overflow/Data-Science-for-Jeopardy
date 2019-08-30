@@ -4,7 +4,7 @@ import numpy as np
 def duplicate_test(data):
     '''
     Tests if a single sample contestant (Ken Jennings) has more than one location 
-    recorded in the dataset.
+    and/or more than one occupation recorded in the dataset.
     Args:
         data (dictionary): keys are dataframe names, values are dataframes
     Returns:
