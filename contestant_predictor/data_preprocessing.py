@@ -2,6 +2,14 @@ import pandas as pd
 import numpy as np
 
 def duplicate_test(data):
+    '''
+    Tests if a single sample contestant (Ken Jennings) has more than one location 
+    recorded in the dataset.
+    Args:
+        data (dictionary): keys are dataframe names, values are dataframes
+    Returns:
+        none
+    '''
     first_names = np.array(data['players']['first'])
     last_names = np.array(data['players']['last'])
     locations = np.array(data['players']['city'])
@@ -13,6 +21,14 @@ def duplicate_test(data):
         counter += 1
 
 def temp(data):
+    '''
+    Groups the player data set by contestant name, occupation, and location to combine 
+    multiple instances of the same contestant.
+    Args: 
+        data (dictionary): keys are dataframe names, values are dataframes   
+    Returns:
+        none
+    '''
     data['players']['combined name'] = data['players']['first'] + ' ' + data['players']['last']
     data['players'].groupby(['combined name', 'occupation','city', 'state']).size()
 
