@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import read_data as rd
 
 def duplicate_test(data):
     '''
@@ -20,15 +21,26 @@ def duplicate_test(data):
             print(locations[counter] + " | " + occupations[counter])
         counter += 1
 
-def temp(data):
+def init_grp(data):
     '''
-    Groups the player data set by contestant name, occupation, and location to combine 
-    multiple instances of the same contestant.
+    Groups the player data set (that's part of the main dataframe) by contestant name, 
+    occupation, and location to combine multiple instances of the same contestant.
     Args: 
-        data (dictionary): keys are dataframe names, values are dataframes   
+        data (dictionary): keys are dataframe names, values are dataframes of jeopardy data  
     Returns:
-        none
+        Modified players dataframe
     '''
     data['players']['combined name'] = data['players']['first'] + ' ' + data['players']['last']
-    data['players'].groupby(['combined name', 'occupation','city', 'state']).size()
+    data['players'] = data['players'].groupby(['combined name', 'occupation','city', 'state']).size()
+    return data['players']
 
+def preprocess(data):
+    '''
+    Function that preprocesses the data. [NEED TO ADD MORE DESCRIPTION]
+    Args:
+        data (dictionary): keys are dataframe names, values are dataframes of jeopardy data
+    Returns:
+        Preprocessed dataframe of training data for training.
+    '''
+    players = init_grp(data)
+    return players
